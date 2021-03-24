@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<time.h>
+#include<alloca.h>
+#define SWAP(a, b, size)                                                      \
+  do                                                                          \
+    {                                                                         \
+      size_t __size = (size);                                        \
+      char *__a =(char *)(a), *__b =(char *)(b);                                   \
+      do                                                                      \
+        {                                                                     \
+          char __tmp = *__a;                                                  \
+          *__a++ = *__b;                                                      \
+          *__b++ = __tmp;                                                     \
+        } while (--__size > 0);                                               \
+    } while (0) 
+
+void select_sort(void *pbase, size_t total_elems,size_t size,int (*compar)(const void *,const void *))
+{
+    int i=0;//要調整的位置
+    int k;//指標位置
+    int x;//更換的位置
+    int temp;
+    void *key;
+        for(i;i<total_elems;i++){
+            k=i;
+            key=pbase+(size*k);
+            x=k;
+            for(k;k<total_elems-1;k++){
+               if(compar(pbase+(size*(k+1)),key)){     
+                    key=pbase+(size*(k+1));
+                    x=k+1;
+               }
+            }
+           SWAP(pbase+size*(x),pbase+(size*(i)),size);
+        }
+}
