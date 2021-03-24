@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<time.h>
+#include<alloca.h>
+
+#define SWAP(a, b, size)                                                      \
+  do                                                                          \
+    {                                                                         \
+      size_t __size = (size);                                        \
+      char *__a =(char *)(a), *__b =(char *)(b);                                   \
+      do                                                                      \
+        {                                                                     \
+          char __tmp = *__a;                                                  \
+          *__a++ = *__b;                                                      \
+          *__b++ = __tmp;                                                     \
+        } while (--__size > 0);                                               \
+    } while (0)
+    
+    void bubble_sort(void *pbase, size_t total_elems,size_t size,int (*compar)(const void *,const void *))
+{
+    int k=1; //已排好資料數量
+    int i; //目前指標位置 
+        for(k;k<total_elems;k++){
+            i=k;
+            for(i;i>0;i--){
+                if(compar(pbase+size*(i),pbase+(size*(i-1)))){
+                    SWAP(pbase+size*(i),pbase+(size*(i-1)),size);
+                }
+                else 
+                    break;    
+            }
+        }
+}
+
+    
