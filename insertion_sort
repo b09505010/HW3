@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<time.h>
+#include<alloca.h>
+
+#define SWAP(a, b, size)                                                      \
+  do                                                                          \
+    {                                                                         \
+      size_t __size = (size);                                        \
+      char *__a =(char *)(a), *__b =(char *)(b);                                   \
+      do                                                                      \
+        {                                                                     \
+          char __tmp = *__a;                                                  \
+          *__a++ = *__b;                                                      \
+          *__b++ = __tmp;                                                     \
+        } while (--__size > 0);                                               \
+    } while (0)
+    
+void insertion_sort(void *pbase, size_t total_elems,size_t size,int (*compar)(const void *,const void *))
+{
+    int i=1;//已排好的個數
+    int k;//指標位置
+    void *key;//需交換的數字
+    int x;//需交換的數字的位置
+        for(i;i<total_elems;i++){
+            k=i;
+            key=pbase+(size*i);
+            for(k;k>0;k--){
+                if(compar(key,pbase+(size*(k-1)))){   
+                    x=k;
+                    break;
+                }else{
+                    x=0;
+                }
+            }
+            for(int y=i;y>x;y--){
+              SWAP(pbase+(size*y),pbase+(size*(y-1)),size);
+            } 
+        }
+}    
